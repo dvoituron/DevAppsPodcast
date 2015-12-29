@@ -1,0 +1,93 @@
+﻿@model DevApps.Podcast.Data.ViewModels.ViewModelBase
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@Model.Header.Title</title>
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/bootstrap.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+
+    <meta name="description" content="@Model.Header.Description">
+    <meta name="author" content="@Model.Header.Creator">
+    <link rel="alternate" type="application/rss+xml" href="@Model.Header.FeedAudioUrl" title="@Model.Header.FeedTitle" />
+
+    <meta property="og:title" content="@Model.Header.Title" />
+    <meta property="og:description" content="@Model.Header.Description" />
+    <meta property="og:url" content="@Model.Header.Url" />
+    <meta property="og:image" content="@Model.Header.ImageUrl" />
+    <meta itemprop="image" content="@Model.Header.ImageUrl" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@Model.Header.TwitterAccount">
+    <meta name="twitter:creator" content="@Model.Header.TwitterAccount">
+    <meta name="twitter:title" content="@Model.Header.Title">
+    <meta name="twitter:description" content="@Model.Header.Description">
+    <meta name="twitter:image" content="@Model.Header.ImageUrl">
+
+    @*AudioJS : http://kolber.github.io/audiojs/*@
+    <script src="/Scripts/audiojs/audio.min.js"></script>
+    <script>
+        audiojs.events.ready(function () {
+            audiojs.createAll();
+        });
+    </script>
+
+    @*Google Analytics*@
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', '@Model.Header.GoogleAnalyticsKey', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink(Model.Header.Name, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Flux audio", "Index", "Feed")</li>
+                    <li>@Html.ActionLink("Flux vidéo", "Index", "Video")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+
+        @* Social Networks *@
+        <div class="row">
+            <div class="col-md-12 socialbutton">
+                @Html.Partial("~/Views/Shared/_SocialButtons.cshtml", Model)
+            </div>
+        </div>
+
+        
+
+        @* Footer *@
+        <hr />
+        <footer>
+            <p style="font-size: 8pt;">v-@Model.Configuration.Version.ToString(3) - &copy; @DateTime.Now.Year - Powered by <a href="@Model.Header.TwitterUrl" target="_blank">@Model.Header.TwitterAccount</a> - More info on <a href="@Model.Header.CopyrightUrl" target="_blank">@Model.Header.CopyrightName</a>.</p>
+        </footer>
+    </div>
+    
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

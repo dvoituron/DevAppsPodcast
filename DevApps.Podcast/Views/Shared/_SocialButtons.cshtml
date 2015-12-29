@@ -1,0 +1,24 @@
+﻿@model DevApps.Podcast.Data.ViewModels.ViewModelBase
+@{
+    Layout = null;
+}
+<div style="text-align: center; vertical-align: top;">
+    <a href="/Feed">
+        <img src="~/Images/RssAudio.png" title="Abonnez-vous au podcast Audio." />
+    </a>
+    <a href="/Video">
+        <img src="~/Images/RssVideo.png" title="Abonnez-vous au podcast Vidéo." />
+    </a>
+    <a href="https://twitter.com/intent/tweet?url=@Model.Configuration.SiteUrl&text=@Url.Encode($"Actuellement, j'écoute {Model.Header.TwitterAccount}")">
+        <img src="~/Images/Twitter.png" title="Partagez sur Twitter." />
+    </a>
+    <a href="http://facebook.com/sharer.php?u=@Model.Configuration.SiteUrl">
+        <img src="~/Images/Facebook.png" title="Partagez sur Facebook." />
+    </a>
+    <a href="https://plus.google.com/share?url=@Model.Configuration.SiteUrl">
+        <img src="~/Images/GooglePlus.png" title="Partagez sur Google+." />
+    </a>
+    <a href="mailto:@Model.Header.CopyrightEmail">
+        <img src="~/Images/Email.png" title="Contactez-moi pour des remarques, des questions ou des sujets de podcasts." />
+    </a>
+</div>

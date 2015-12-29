@@ -1,0 +1,34 @@
+﻿@model DevApps.Podcast.Data.ViewModels.HomeViewModel
+@using DevApps.Podcast.Data.Models
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*Banner*@
+<div class="jumbotron">
+    <div class="banner"></div>
+</div>
+
+@*List of podcasts*@
+@foreach (var podcast in Model.Podcasts)
+{
+    <div class="row">
+        <div class="col-md-8">
+            <h2><a href="@podcast.PodcastUri">#@podcast.PodcastID - @podcast.Summary.Title</a></h2>
+            <h5>@podcast.PublicationDate.ToLongDateString() - @Html.Raw(podcast.Summary.Authors.GetAuthorsAsLinks())</h5>
+            <br />
+            <p>
+                @podcast.Summary.Description
+            </p>
+            <p>
+                <a class="btn btn-default" href="@podcast.PodcastUri">Plus d'info...</a>
+            </p>
+        </div>
+        <div class="col-md-4" style="padding-top: 15px; text-align: center;">
+            <iframe width="300" height="225" src="https://www.youtube.com/embed/@podcast.Video.YoutubeKey?showinfo=0" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+    <br />
+}
+
