@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web;
 
 namespace DevApps.Podcast.Data.Models
@@ -12,6 +13,8 @@ namespace DevApps.Podcast.Data.Models
         public Uri SiteUrl { get; set; }
 
         public Version Version { get; set; }
+
+        public KeyValuePair<string, string> AzureStorageCredentials { get; set; }
 
         public static Uri WebSiteBaseUri
         {

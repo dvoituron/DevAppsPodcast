@@ -87,6 +87,7 @@ INSERT INTO dbo.Configuration (ConfigurationID, Name, Value) VALUES(17, 'Creator
 INSERT INTO dbo.Configuration (ConfigurationID, Name, Value) VALUES(18, 'FeedAudioUrl',                'http://devapps.be/feed')
 INSERT INTO dbo.Configuration (ConfigurationID, Name, Value) VALUES(19, 'FeedVideoUrl',                'http://devapps.be/video')
 INSERT INTO dbo.Configuration (ConfigurationID, Name, Value) VALUES(20, 'FeedTitle',                   'DevApps Podcasts, par Denis Voituron et Christophe Peugnet')
+INSERT INTO dbo.Configuration (ConfigurationID, Name, Value) VALUES(21, 'AzureStorageCredentials',     'AccountName;KeyCrypted')
 SET IDENTITY_INSERT dbo.Configuration OFF
 
 SET IDENTITY_INSERT dbo.PodcastAuthor ON
@@ -542,7 +543,9 @@ VALUES
             Le site de référence ASP.NET/MVC (en anglais)</a></li>
         <li><a href="http://www.aweil.fr/" target="_blank">
             Arnaud Weil - Présentation et Blog</a></li>
-        </ul>
+        <li><a href="http://leanpub.com/aspnetmvc/c/cL5qQhIOO2Ec" target="_blank">
+            Offre spéciale: version ebook à 4,5$ seulement jusqu''au 30 janvier 2016 pour les auditeurs de DevApps.be</a></li>
+	    </ul>
       ', -- Notes
     'http://podcastdevapps.blob.core.windows.net/mp3/Podcast-12-ASPNET-MVC.mp3', -- AudioUrl
     57354866, -- AudioSize

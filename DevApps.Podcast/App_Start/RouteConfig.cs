@@ -14,6 +14,12 @@ namespace DevApps.Podcast
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+               name: "AzureLogs",
+               url: "Logs/{action}",
+               defaults: new { controller = "Logs" }
+           );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{id}",  // "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
@@ -24,7 +30,6 @@ namespace DevApps.Podcast
                 url: "File/{action}/{id}",
                 defaults: new { controller = "File", action = "Audio" }
             );
-
         }
     }
 }

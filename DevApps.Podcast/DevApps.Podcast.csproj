@@ -143,6 +143,7 @@
     <Content Include="Scripts\audiojs\player-graphics.gif" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\Local.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -158,6 +159,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\FileController.cs" />
+    <Compile Include="Controllers\LogsController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
     <Compile Include="Controllers\FeedController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -181,6 +183,7 @@
     <Content Include="Views\Feed\Index.cshtml" />
     <Content Include="Views\Video\Index.cshtml" />
     <Content Include="Views\Shared\_SocialButtons.cshtml" />
+    <Content Include="Views\Logs\Summary.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

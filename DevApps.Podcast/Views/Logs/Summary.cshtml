@@ -1,0 +1,37 @@
+﻿@model DevApps.Podcast.Data.ViewModels.LogSummaryViewModel[]
+@{
+    ViewBag.Title = "Logs Summary";
+    Layout = null;
+}
+
+<style>
+    tr:nth-child(odd) {
+        background-color: #eee;
+    }
+
+    tr:nth-child(even) {
+        background-color: #fff;
+    }
+</style>
+
+<h1>MP3 and MP4 full downloaded since @ViewBag.StartDate.ToString("dd MMM yyyy HH:mm")</h1>
+
+<table>
+    <tr>
+        <th style="width: 300px;">Filename</th>
+        <th style="width: 100px;">Audio</th>
+        <th style="width: 100px;">Video</th>
+        <th style="width: 100px;">Youtube</th>
+        <th style="width: 100px;">Total</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Filename</td>
+            <td>@item.Mp3Views</td>
+            <td>@item.Mp4Views</td>
+            <td>@item.YoutubeViews</td>
+            <td>@item.Total</td>
+        </tr>
+    }
+</table>

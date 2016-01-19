@@ -179,6 +179,10 @@ namespace DevApps.Podcast.Data.Models
                         case "Version":
                             _configuration.Version = new Version(item.Value);
                             break;
+                        case "AzureStorageCredentials":
+                            string[] splitted = item.Value.Split(';');
+                            _configuration.AzureStorageCredentials = new KeyValuePair<string, string>(splitted[0], splitted[1]);
+                            break;
                         case "SiteName":
                             _siteHeader.Title = item.Value;
                             _siteHeader.Name = item.Value;
