@@ -11,10 +11,27 @@ namespace DevApps.Podcast.Data.Models
     /// </summary>
     public class SqlDataService : IDataService
     {
-        private readonly string _connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["DevAppsConnectionString"].ConnectionString;
+        private readonly string _connectionString = null;
         private static Configuration _configuration = null;
         private static SocialInformation _siteHeader = null;
         private static IEnumerable<Podcast> _podcasts = null;
+
+        /// <summary>
+        /// Initializes a new instance of SqlDataService
+        /// </summary>
+        public SqlDataService()
+        {
+            _connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["DevAppsConnectionString"].ConnectionString;
+
+#if DEBUG
+            Registry registry = new Registry(@"Software\DevApps\", "Podcast", "Configuration");
+            string connectionStringInRegistry = registry.GetValue("ConnectionString");
+
+            if (!String.IsNullOrEmpty(connectionStringInRegistry))
+                _connectionString = connectionStringInRegistry;
+#endif
+
+        }
 
         /// <summary>
         /// <see cref="IDataService.Configuration"/>
@@ -121,9 +138,12 @@ namespace DevApps.Podcast.Data.Models
 
             // Custom social information
             Podcast podcast = this.GetPodcast(podcastID);
-            socialInformation.Title = podcast.Summary.Title;
-            socialInformation.Description = podcast.Summary.Description;
-            socialInformation.Url = podcast.PodcastUri.ToString();
+            if (podcast != null)
+            {
+                socialInformation.Title = podcast.Summary.Title;
+                socialInformation.Description = podcast.Summary.Description;
+                socialInformation.Url = podcast.PodcastUri.ToString();
+            }
 
             return socialInformation;
         }

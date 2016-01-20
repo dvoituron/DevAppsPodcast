@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Models\AzureLogs.cs" />
     <Compile Include="Models\Configuration.cs" />
+    <Compile Include="Models\Registry.cs" />
     <Compile Include="Models\SqlDataService.cs" />
     <Compile Include="Models\DesignDataService.cs" />
     <Compile Include="Models\Extensions.cs" />
@@ -100,6 +101,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Models\SqlScripts\Script-01.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\SqlScripts\Script-02.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
