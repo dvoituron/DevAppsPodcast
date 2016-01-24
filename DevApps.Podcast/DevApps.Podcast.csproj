@@ -184,6 +184,7 @@
     <Content Include="Views\Video\Index.cshtml" />
     <Content Include="Views\Shared\_SocialButtons.cshtml" />
     <Content Include="Views\Logs\Summary.cshtml" />
+    <Content Include="Views\Logs\Summary2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

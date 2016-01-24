@@ -10,7 +10,7 @@ namespace DevApps.Podcast.Data.ViewModels
     {
         public string Filename { get; set; }
 
-        public int Total
+        public long Total
         {
             get
             {
@@ -18,10 +18,10 @@ namespace DevApps.Podcast.Data.ViewModels
             }
         }
 
-        public int Mp3Views { get; set; }
+        public long Mp3Views { get; set; }
 
-        public int Mp4Views { get; set; }
+        public long Mp4Views { get; set; }
 
-        public int YoutubeViews { get; set; }
+        public long YoutubeViews { get; set; }
     }
 }

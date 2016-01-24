@@ -30,8 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Apps72.Dev.Data, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Apps72.Dev.Data.1.2.0\lib\net40-client\Apps72.Dev.Data.dll</HintPath>
+    <Reference Include="Apps72.Dev.Data, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Apps72.Dev.Data.1.3.0\lib\net40-client\Apps72.Dev.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Models\AzureLogs.cs" />
     <Compile Include="Models\Configuration.cs" />
+    <Compile Include="Models\PodcastForStatistic.cs" />
     <Compile Include="Models\Registry.cs" />
     <Compile Include="Models\SqlDataService.cs" />
     <Compile Include="Models\DesignDataService.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="ViewModels\LogSummaryViewModel.cs" />
     <Compile Include="ViewModels\PodcastViewModel.cs" />
     <Compile Include="ViewModels\RssClasses.cs" />
+    <Compile Include="ViewModels\StatisticViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -104,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Models\SqlScripts\Script-02.sql" />
+    <Content Include="Models\SqlScripts\Script-03.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

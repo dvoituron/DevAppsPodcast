@@ -27,6 +27,7 @@ namespace DevApps.Podcast.Models
             _container.RegisterType<HomeViewModel>();
             _container.RegisterType<PodcastViewModel>();
             _container.RegisterType<FeedsViewModel>();
+            _container.RegisterType<StatisticViewModel>();
         }
 
         /// <summary>
@@ -59,6 +60,28 @@ namespace DevApps.Podcast.Models
             }
         }
 
+        /// <summary>
+        /// Gets the Feeds ViewModel (Audio and Video)
+        /// </summary>
+        public StatisticViewModel Statistics
+        {
+            get
+            {
+                return _container.Resolve<StatisticViewModel>();
+            }
+        }
+
+        /// <summary>
+        /// Gets a reference to the DataService
+        /// </summary>
+        public IDataService DataService
+        {
+            get
+            {
+                return _container.Resolve<IDataService>();
+            }
+
+        }
         /// <summary>
         /// Gets a reference to the UnityDependencyResolver
         /// </summary>

@@ -62,6 +62,7 @@ namespace DevApps.Podcast.Data.Models
     {
         public PodcastVideo(Podcast podcast) : base(podcast)
         { }
+
         public string YoutubeKey { get; set; }
     }
 
@@ -73,7 +74,9 @@ namespace DevApps.Podcast.Data.Models
         {
             _podcast = podcast;
         }
+
         public string RemoteUrl { get; set; }
+
         public string PublicUrl
         {
             get
@@ -85,7 +88,9 @@ namespace DevApps.Podcast.Data.Models
             }
         }
         public uint Size { get; set; }
+
         public TimeSpan Duration { get; set; }
 
+        public int Downloaded { get; set; }
     }
 }

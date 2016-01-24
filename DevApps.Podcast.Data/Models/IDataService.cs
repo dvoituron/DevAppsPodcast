@@ -51,5 +51,18 @@ namespace DevApps.Podcast.Data.Models
         /// Gets the database version
         /// </summary>
         Version Version { get; }
+
+        /// <summary>
+        /// Write a statistic item in a DB
+        /// </summary>
+        /// <param name="podcastID">ID of podcast to trace</param>
+        /// <param name="fileExtension">Extension of file read</param>
+        void WriteStatisticItem(int podcastID, string fileExtension);
+
+        /// <summary>
+        /// Returns light Podcast objects
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<PodcastForStatistic> GetStatistics();
     }
 }

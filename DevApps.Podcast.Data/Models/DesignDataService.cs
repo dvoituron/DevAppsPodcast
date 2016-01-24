@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -164,6 +165,25 @@ namespace DevApps.Podcast.Data.Models
         public SocialInformation GetSiteHeader()
         {
             return this.GetSocialInformation(0);
+        }
+
+        /// <summary>
+        /// <see cref="IDataService.WriteStatisticItem(int)"/>
+        /// </summary>
+        /// <param name="podcastID"></param>
+        /// <param name="fileExtension"></param>
+        public void WriteStatisticItem(int podcastID, string fileExtension)
+        {
+            Debug.WriteLine($"This podcast '{podcastID}'has been read.");
+        }
+
+        /// <summary>
+        /// /
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<PodcastForStatistic> GetStatistics()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -13,6 +13,22 @@ namespace DevApps.Podcast.Controllers
         // GET: Podcast
         public ActionResult Summary()
         {
+            var logItemsGrouped = from i in this.Locator.Statistics.PodcastSummaries
+                                  group i by i.PodcastID into g
+                                  select new LogSummaryViewModel()
+                                  {
+                                      Filename = $"{g.First().PodcastID:000}. {g.First().SummaryTitle}",
+                                      Mp3Views = g.First(i => i.FileType == "mp3").Downloaded,
+                                      Mp4Views = g.First(i => i.FileType == "mp4").Downloaded
+                                  };
+
+            ViewBag.StartDate = DateTime.Now;
+            return View(logItemsGrouped.OrderBy(i => i.Filename).ToArray());
+        }
+
+        // GET: Podcast
+        public ActionResult Summary2()
+        {
             AzureLogs logs = new AzureLogs(this.Locator.Home.Configuration);
 
             logs.OnlyForExtensions.Add("mp3");

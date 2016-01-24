@@ -27,6 +27,7 @@ namespace DevApps.Podcast.Controllers
             _url = url;
         }
 
+        /// <summary />
         protected override void WriteFile(HttpResponseBase localResponse)
         {
             var webRequest = WebRequest.Create(_url);

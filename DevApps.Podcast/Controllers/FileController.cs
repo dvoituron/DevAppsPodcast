@@ -16,7 +16,9 @@ namespace DevApps.Podcast.Controllers
         /// <returns></returns>
         public ActionResult Audio(string id)
         {
-            return new WebRequestFileResult(this.GetPodcast(id).Audio.RemoteUrl);
+            Data.Models.Podcast podcast = this.GetPodcast(id);
+            this.Locator.DataService.WriteStatisticItem(podcast != null ? podcast.PodcastID : 0, "mp3");
+            return new WebRequestFileResult(podcast.Audio.RemoteUrl);
         }
 
         /// <summary>
@@ -26,7 +28,9 @@ namespace DevApps.Podcast.Controllers
         /// <returns></returns>
         public ActionResult Video(string id)
         {
-            return new WebRequestFileResult(this.GetPodcast(id).Video.RemoteUrl);
+            Data.Models.Podcast podcast = this.GetPodcast(id);
+            this.Locator.DataService.WriteStatisticItem(podcast != null ? podcast.PodcastID : 0, "mp4");
+            return new WebRequestFileResult(podcast.Video.RemoteUrl);
         }
 
         /// <summary>

@@ -1,8 +1,9 @@
-﻿INSERT INTO dbo.Podcast (PodcastID, PodcastKey, PublicationDate, SummaryTitle, SummaryDescription, Notes, AudioUrl, AudioSize, AudioDuration, VideoUrl, VideoSize, VideoDuration, VideoYoutubeKey)
+﻿SET IDENTITY_INSERT dbo.Podcast ON
+INSERT INTO dbo.Podcast (PodcastID, PodcastKey, PublicationDate, SummaryTitle, SummaryDescription, Notes, AudioUrl, AudioSize, AudioDuration, VideoUrl, VideoSize, VideoDuration, VideoYoutubeKey)
 VALUES
 (
     13, --PodcastID 
-    'apprendre_aspnet_mvc_tour_horizon', -- PodcastKey
+    'intro_linq', -- PodcastKey
     '2016-01-20 21:00:00', -- PublicationDate
     'Linq: En partant des Predicats jusqu''au expressions Lambda.', -- SummaryTitle
     'Dans cet épisode, nous reprenons les concepts introduits dans le Framework 3.5 afin de disposer de la syntaxe Linq. Nous passons ainsi en revue les notions de types anonymes, d''inférence de type, de méthodes d''extension, d''expression Lambda, etc.', -- SummaryDescription
@@ -28,3 +29,4 @@ VALUES
     '00:48:56', -- VideoDuration
     'K95LzWcAnWo' -- VideoYoutubeKey
 )
+SET IDENTITY_INSERT dbo.Podcast OFF

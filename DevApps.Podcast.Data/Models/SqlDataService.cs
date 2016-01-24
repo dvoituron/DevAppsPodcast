@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Web;
 
 namespace DevApps.Podcast.Data.Models
 {
@@ -112,6 +113,11 @@ namespace DevApps.Podcast.Data.Models
             return _siteHeader;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="podcastID"></param>
+        /// <returns></returns>
         public SocialInformation GetSocialInformation(int podcastID)
         {
             this.LoadConfigurationAndHeaders();
@@ -345,6 +351,71 @@ namespace DevApps.Podcast.Data.Models
                 });
 
             }
+        }
+
+        /// <summary>
+        /// Add a new trace of podcast view in PodcastStatistic Table's DB
+        /// </summary>
+        /// <param name="podcastID">ID of podcast to trace</param>
+        /// <param name="fileExtension">Extension of file read</param>
+        public void WriteStatisticItem(int podcastID, string fileExtension)
+        {
+            using (SqlDatabaseCommand cmd = this.GetDatabaseCommand())
+            {
+                cmd.CommandText.AppendLine(" IF EXISTS(SELECT * FROM Podcast WHERE PodcastID = @PodcastID) ")
+                               .AppendLine(" IF NOT EXISTS(SELECT * FROM PodcastStatistic WHERE PodcastID = @PodcastID AND FileType = @FileType AND UserAgent = @UserAgent AND UserIP = @UserIP AND DATEDIFF(second, GETDATE(), RecordedDate) < 5) ")
+                               .AppendLine("    INSERT INTO PodcastStatistic (PodcastID,  FileType,  UserAgent,  UserIP,  UserCountry) ")
+                               .AppendLine("                          VALUES (@PodcastID, @FileType, @UserAgent, @UserIP, @UserCountry) ");
+
+                cmd.Parameters.AddValues(new
+                {
+                    PodcastID = podcastID,
+                    FileType = fileExtension,
+                    UserAgent = HttpContext.Current.Request.UserAgent,
+                    UserIP = HttpContext.Current.Request.UserHostAddress,
+                    UserCountry = string.Empty  // To retrieve later
+                });
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        /// <summary>
+        /// Returns the Podcast statistics
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<PodcastForStatistic> GetStatistics()
+        {
+            List<PodcastForStatistic> statistics = new List<PodcastForStatistic>();
+
+            // Get all podcasts
+            using (SqlDatabaseCommand cmd = this.GetDatabaseCommand())
+            {
+                cmd.CommandText.AppendLine(" SELECT PodcastID, SummaryTitle, ISNULL(AudioAlreadyDownloaded, 0) AS Downloaded, 'mp3' AS FileType FROM Podcast ")
+                               .AppendLine(" UNION ")
+                               .AppendLine(" SELECT PodcastID, SummaryTitle, ISNULL(VideoAlreadyDownloaded, 0) AS Downloaded, 'mp4' AS FileType FROM Podcast ")
+                               .AppendLine(" ORDER BY PodcastID, FileType ");
+
+                statistics = cmd.ExecuteTable<PodcastForStatistic>().ToList();
+            }
+
+            // Add statistics values
+            using (SqlDatabaseCommand cmd = this.GetDatabaseCommand())
+            {
+                cmd.CommandText.AppendLine(" SELECT PodcastID, FileType, COUNT(*) AS Downloaded ")
+                               .AppendLine("  FROM PodcastStatistic ")
+                               .AppendLine(" GROUP BY PodcastID, FileType ");
+
+                var data = cmd.ExecuteTable( new { PodcastID = 0, FileType = "", Downloaded = 0 });
+
+                foreach (var item in data)
+                {
+                    statistics.First(i => i.PodcastID == item.PodcastID && i.FileType == item.FileType)
+                              .Downloaded += item.Downloaded;
+                }
+            }
+
+            return statistics;
         }
     }
 }
