@@ -363,7 +363,7 @@ namespace DevApps.Podcast.Data.Models
             using (SqlDatabaseCommand cmd = this.GetDatabaseCommand())
             {
                 cmd.CommandText.AppendLine(" IF EXISTS(SELECT * FROM Podcast WHERE PodcastID = @PodcastID) ")
-                               .AppendLine(" IF NOT EXISTS(SELECT * FROM PodcastStatistic WHERE PodcastID = @PodcastID AND FileType = @FileType AND UserAgent = @UserAgent AND UserIP = @UserIP AND DATEDIFF(second, GETDATE(), RecordedDate) < 5) ")
+                               .AppendLine(" IF NOT EXISTS(SELECT * FROM PodcastStatistic WHERE PodcastID = @PodcastID AND FileType = @FileType AND UserAgent = @UserAgent AND UserIP = @UserIP AND DATEDIFF(second, RecordedDate, GETDATE()) < 5) ")
                                .AppendLine("    INSERT INTO PodcastStatistic (PodcastID,  FileType,  UserAgent,  UserIP,  UserCountry) ")
                                .AppendLine("                          VALUES (@PodcastID, @FileType, @UserAgent, @UserIP, @UserCountry) ");
 
