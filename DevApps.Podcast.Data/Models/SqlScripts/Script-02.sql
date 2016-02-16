@@ -30,3 +30,6 @@ VALUES
     'K95LzWcAnWo' -- VideoYoutubeKey
 )
 SET IDENTITY_INSERT dbo.Podcast OFF
+
+INSERT INTO PodcastAuthorLink VALUES(13, 1)
+INSERT INTO PodcastAuthorLink VALUES(13, 2)

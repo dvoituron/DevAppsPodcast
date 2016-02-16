@@ -105,6 +105,7 @@
     <None Include="Models\SqlScripts\Script-01.sql" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Models\SqlScripts\Script-04.sql" />
     <Content Include="Models\SqlScripts\Script-02.sql" />
     <Content Include="Models\SqlScripts\Script-03.sql" />
   </ItemGroup>
