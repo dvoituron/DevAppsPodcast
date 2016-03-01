@@ -64,5 +64,10 @@ namespace DevApps.Podcast.Data.Models
         /// </summary>
         /// <returns></returns>
         IEnumerable<PodcastForStatistic> GetStatistics();
+
+        /// <summary>
+        /// Clear all data stored in cached objects.
+        /// </summary>
+        void ClearCache();
     }
 }

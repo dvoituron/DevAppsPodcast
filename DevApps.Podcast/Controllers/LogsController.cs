@@ -51,5 +51,15 @@ namespace DevApps.Podcast.Controllers
             ViewBag.StartDate = logItems.Min(i => i.RequestStartTime);
             return View(logItemsGrouped.OrderBy(i => i.Filename).ToArray());
         }
+
+        /// <summary>
+        /// Clear all data stored in cached objects.
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ClearCache()
+        {
+            this.Locator.DataService.ClearCache();
+            return View();
+        }
     }
 }

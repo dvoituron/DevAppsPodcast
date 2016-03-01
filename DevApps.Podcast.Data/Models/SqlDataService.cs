@@ -363,7 +363,6 @@ namespace DevApps.Podcast.Data.Models
             using (SqlDatabaseCommand cmd = this.GetDatabaseCommand())
             {
                 cmd.CommandText.AppendLine(" IF EXISTS(SELECT * FROM Podcast WHERE PodcastID = @PodcastID) ")
-                               .AppendLine(" IF NOT EXISTS(SELECT * FROM PodcastStatistic WHERE PodcastID = @PodcastID AND FileType = @FileType AND UserAgent = @UserAgent AND UserIP = @UserIP AND DATEDIFF(second, RecordedDate, GETDATE()) < 5) ")
                                .AppendLine("    INSERT INTO PodcastStatistic (PodcastID,  FileType,  UserAgent,  UserIP,  UserCountry) ")
                                .AppendLine("                          VALUES (@PodcastID, @FileType, @UserAgent, @UserIP, @UserCountry) ");
 
@@ -406,7 +405,7 @@ namespace DevApps.Podcast.Data.Models
                                .AppendLine("  FROM PodcastStatistic ")
                                .AppendLine(" GROUP BY PodcastID, FileType ");
 
-                var data = cmd.ExecuteTable( new { PodcastID = 0, FileType = "", Downloaded = 0 });
+                var data = cmd.ExecuteTable(new { PodcastID = 0, FileType = "", Downloaded = 0 });
 
                 foreach (var item in data)
                 {
@@ -416,6 +415,16 @@ namespace DevApps.Podcast.Data.Models
             }
 
             return statistics;
+        }
+
+        /// <summary>
+        /// Clear all data stored in cached objects.
+        /// </summary>
+        public void ClearCache()
+        {
+            _configuration = null;
+            _siteHeader = null;
+            _podcasts = null;
         }
     }
 }

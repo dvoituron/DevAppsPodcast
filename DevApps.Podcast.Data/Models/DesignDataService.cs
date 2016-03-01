@@ -185,5 +185,10 @@ namespace DevApps.Podcast.Data.Models
         {
             throw new NotImplementedException();
         }
+
+        public void ClearCache()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
