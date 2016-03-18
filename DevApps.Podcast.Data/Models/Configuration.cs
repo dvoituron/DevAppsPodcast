@@ -16,6 +16,8 @@ namespace DevApps.Podcast.Data.Models
 
         public KeyValuePair<string, string> AzureStorageCredentials { get; set; }
 
+        public string YoutubeStatisticsApiKey { get; set; }
+
         public static Uri WebSiteBaseUri
         {
             get

@@ -1,8 +1,10 @@
 ﻿using Apps72.Dev.Data;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 
 namespace DevApps.Podcast.Data.Models
@@ -258,6 +260,9 @@ namespace DevApps.Podcast.Data.Models
                         case "FeedTitle":
                             _siteHeader.FeedTitle = item.Value;
                             break;
+                        case "YoutubeStatisticsApiKey":
+                            _configuration.YoutubeStatisticsApiKey = item.Value;
+                            break;
                     }
                 }
             }
@@ -393,6 +398,8 @@ namespace DevApps.Podcast.Data.Models
                 cmd.CommandText.AppendLine(" SELECT PodcastID, SummaryTitle, ISNULL(AudioAlreadyDownloaded, 0) AS Downloaded, 'mp3' AS FileType FROM Podcast ")
                                .AppendLine(" UNION ")
                                .AppendLine(" SELECT PodcastID, SummaryTitle, ISNULL(VideoAlreadyDownloaded, 0) AS Downloaded, 'mp4' AS FileType FROM Podcast ")
+                               .AppendLine(" UNION ")
+                               .AppendLine(" SELECT PodcastID, SummaryTitle, ISNULL(VideoAlreadyDownloaded, 0) AS Downloaded, 'youtube' AS FileType FROM Podcast ")
                                .AppendLine(" ORDER BY PodcastID, FileType ");
 
                 statistics = cmd.ExecuteTable<PodcastForStatistic>().ToList();
@@ -414,7 +421,68 @@ namespace DevApps.Podcast.Data.Models
                 }
             }
 
+            // Add youtube statistics
+            Dictionary<int, int?> youtubeStat = GetYoutubeStatistics();
+            foreach (var item in statistics)
+            {
+                if (item.FileType == "youtube")
+                {
+                    item.Downloaded = youtubeStat.ContainsKey(item.PodcastID) ? youtubeStat[item.PodcastID].Value : 0;
+                }
+            }
+
             return statistics;
+        }
+
+        /// <summary>
+        /// Gets the statisctics about these youtube videos: a list of {PodcastID, NumberOfYoutubeViews}.
+        /// </summary>
+        /// <remarks>
+        /// 1. Connect you to https://console.developers.google.com
+        /// 2. Create a project and activate "YouTube Data API"
+        /// 3. Create a new API key in section Credentials, and use this key below
+        /// </remarks>
+        private Dictionary<int, int?> GetYoutubeStatistics()
+        {
+            //var youtubeKeys = null;
+
+            // Search all Youtube keys.
+            using (SqlDatabaseCommand cmd = this.GetDatabaseCommand())
+            {
+                cmd.CommandText.AppendLine(" SELECT PodcastID, VideoYoutubeKey, 0 AS Views FROM Podcast ");
+                var youtubeKeys = cmd.ExecuteTable(new { PodcastID = 0, VideoYoutubeKey = "", Views = 0 }).ToArray();
+
+                // Youtube statistics URL
+                string keys = String.Join(",", youtubeKeys.Select(i => i.VideoYoutubeKey).ToArray());
+                string googleapi = $"https://www.googleapis.com/youtube/v3/videos?part=statistics&id={keys}&key={this.Configuration.YoutubeStatisticsApiKey}";
+
+                Dictionary<int, int?> statistics = new Dictionary<int, int?>();
+
+                // Read web content
+                using (HttpClient client = new HttpClient())
+                {
+                    string googleResult = client.GetStringAsync(googleapi).Result;
+
+                    // Deserialize
+                    var definition = new { items = new[] { new { id = "", statistics = new { viewCount = 0 } } } };
+                    var data = JsonConvert.DeserializeAnonymousType(googleResult, definition);
+
+                    if (data != null && data.items != null && data.items.Length > 0)
+                    {
+                        foreach (var item in data.items)
+                        {
+                            
+                            statistics.Add(youtubeKeys.First(i => i.VideoYoutubeKey == item.id).PodcastID, 
+                                           item.statistics?.viewCount);
+                        }
+                        return statistics;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
         }
 
         /// <summary>

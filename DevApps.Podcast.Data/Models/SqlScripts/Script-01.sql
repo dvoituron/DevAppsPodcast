@@ -88,6 +88,7 @@ INSERT INTO dbo.Configuration (ConfigurationID, Name, Value) VALUES(18, 'FeedAud
 INSERT INTO dbo.Configuration (ConfigurationID, Name, Value) VALUES(19, 'FeedVideoUrl',                'http://devapps.be/video')
 INSERT INTO dbo.Configuration (ConfigurationID, Name, Value) VALUES(20, 'FeedTitle',                   'DevApps Podcasts, par Denis Voituron et Christophe Peugnet')
 INSERT INTO dbo.Configuration (ConfigurationID, Name, Value) VALUES(21, 'AzureStorageCredentials',     'AccountName;KeyCrypted')
+INSERT INTO dbo.Configuration (ConfigurationID, Name, Value) VALUES(22, 'YoutubeStatisticsApiKey',     'GoogleKey')
 SET IDENTITY_INSERT dbo.Configuration OFF
 
 SET IDENTITY_INSERT dbo.PodcastAuthor ON

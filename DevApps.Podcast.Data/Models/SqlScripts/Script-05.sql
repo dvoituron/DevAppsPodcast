@@ -11,7 +11,7 @@ VALUES
     'windowsappstudio', -- PodcastKey
     '2016-03-01 22:00:00', -- PublicationDate
     'Windows App Studio - Transformez votre idée en application Windows en un temps record.', -- SummaryTitle
-    'Michel Lopez, le Project Manager de Microsoft nous décrit Windows App Studio, Il s''agit d''un outil de création d''application en ligne gratuit qui vous permet de créer rapidement des applications Windows et Windows Mobile que vous pouvez ensuite publier, tester et partager. Et si vous souhaitez utiliser des fonctionnalités de programmation avancées, Windows App Studio génère le code source utilisable dans Visual Studio.', -- SummaryDescription
+    'Michel Lopez, le Program Manager de Microsoft nous décrit Windows App Studio, Il s''agit d''un outil de création d''application en ligne gratuit qui vous permet de créer rapidement des applications Windows et Windows Mobile que vous pouvez ensuite publier, tester et partager. Et si vous souhaitez utiliser des fonctionnalités de programmation avancées, Windows App Studio génère le code source utilisable dans Visual Studio.', -- SummaryDescription
     '
       <h3>Podcast Notes</h3>
       Voici quelques liens sur Windows App Studio.

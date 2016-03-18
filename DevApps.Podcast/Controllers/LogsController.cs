@@ -19,7 +19,8 @@ namespace DevApps.Podcast.Controllers
                                   {
                                       Filename = $"{g.First().PodcastID:000}. {g.First().SummaryTitle}",
                                       Mp3Views = g.First(i => i.FileType == "mp3").Downloaded,
-                                      Mp4Views = g.First(i => i.FileType == "mp4").Downloaded
+                                      Mp4Views = g.First(i => i.FileType == "mp4").Downloaded,
+                                      YoutubeViews = g.First(i => i.FileType == "youtube").Downloaded
                                   };
 
             ViewBag.StartDate = DateTime.Now;
