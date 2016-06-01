@@ -44,6 +44,9 @@ CREATE TABLE Podcast
     CONSTRAINT CK_PodcastKey CHECK	(PodcastKey NOT LIKE '%[^A-Za-z0-9\_]%')
 )
 
+ALTER TABLE Podcast
+  ADD ImageUrl VARCHAR(256)
+
 CREATE TABLE PodcastAuthor
 (
     PodcastAuthorID INT IDENTITY(1,1) NOT NULL,
