@@ -107,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Models\SqlScripts\Script-13.sql" />
+    <Content Include="Models\SqlScripts\Script-12.sql" />
     <Content Include="Models\SqlScripts\Script-11.sql" />
     <Content Include="Models\SqlScripts\Script-10.sql" />
     <Content Include="Models\SqlScripts\Script-09.sql" />
